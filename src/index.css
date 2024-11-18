@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.siteviews {
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  p {
+    margin-bottom: 10px;
+  }
+}
