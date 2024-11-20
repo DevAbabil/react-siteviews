@@ -1,6 +1,6 @@
 {
   "name": "react-siteviews",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "main": "./src/index.js",
   "description": "A react component for SiteViews counter",
   "author": {

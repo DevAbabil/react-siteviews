@@ -46,7 +46,7 @@ export default ViewsCounter;
 
 > ## Note :
 >
-> If you use `visited` or `getData` props. then you shuld make your own component memoized first. Otherwise you might get unexpected rerender from `SiteViews` Component. because when you use those props in `SiteViews` component, its enternally called after complete some operation. Which is reson for rerendering of `SiteViews`. So if you prevent this unexected behavior, Here is the simple solution that you can follow.
+> If you use `visited` or `getData` props. then you should make your own component memoized first. Otherwise you might get unexpected rerender from `SiteViews` Component. because when you use those props in `SiteViews` component, its enternally called after complete some operation. Which is reson for rerendering of `SiteViews`. So if you prevent this unexpected behavior, Here is the simple solution that you can follow.
 
 ```jsx
 import { memo } from "react";
