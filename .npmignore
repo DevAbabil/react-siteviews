@@ -2,3 +2,5 @@ test
 src
 tsconfig.json
 tsup.config.ts
+vite.config.ts
+index.html

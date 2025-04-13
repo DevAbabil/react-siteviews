@@ -1,19 +1,29 @@
 {
-  "name": "react-react-siteviews",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "react-siteviews",
+  "version": "2.0.1",
   "scripts": {
-    "build": "tsup --watch",
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "clean": "rimraf dist",
     "dev": "vite",
     "preview": "vite preview"
   },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
   "type": "module",
+  "sideEffects": false,
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -35,6 +45,7 @@
     "@types/react": "^19.1.1",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.3.4",
+    "rimraf": "^5.0.10",
     "slugify": "^1.6.6",
     "tsup": "^8.4.0",
     "typescript": "^5.8.3",
