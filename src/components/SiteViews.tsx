@@ -19,7 +19,7 @@ type SiteViewsProps = {
   visited?: () => void;
   getData?: <T extends any[]>(siteViewsFullData: T) => void;
   className?: string;
-  style: CSSProperties;
+  style?: CSSProperties;
   suppressLogs?: boolean;
 } & HTMLAttributes<HTMLDivElement>;
 
