@@ -174,11 +174,11 @@ const SiteViews: FC<SiteViewsProps> = (props: SiteViewsProps) => {
   }, []);
 
   return (
-    <div style={style} className={className} {...rest}>
+    <span style={style} className={className} {...rest}>
       {isLocal && 0}
       {!isLocal &&
         ((rs.loading && !isVisited) || !Boolean(count) ? children : count)}
-    </div>
+    </span>
   );
 };
 
