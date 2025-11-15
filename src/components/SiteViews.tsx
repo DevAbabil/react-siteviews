@@ -1,54 +1,42 @@
 import { useGetDeviceInfo, useGetIpInfo, useReqRes, useUtils } from "@/hooks";
 import { Log, SITEVIEWS_API } from "@/shared";
-import {
-  CSSProperties,
-  FC,
-  HTMLAttributes,
-  HTMLProps,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import * as React from "react";
 import slugify from "slugify";
 
 type SiteViewsProps = {
   projectName: string;
-  children?: ReactNode;
+  children?: React.ReactNode;
   refresh?: string | number;
   visited?: () => void;
   getData?: <T extends any[]>(siteViewsFullData: T) => void;
   className?: string;
-  style?: CSSProperties;
+  style?: React.CSSProperties;
   suppressLogs?: boolean;
-} & HTMLAttributes<HTMLDivElement>;
+} & React.HTMLAttributes<HTMLDivElement>;
 
-const SiteViews: FC<SiteViewsProps> = (props: SiteViewsProps) => {
-  let {
-    projectName,
-    children,
-    refresh,
-    getData,
-    visited,
-    suppressLogs,
-    style,
-    className,
-    ...rest
-  } = props;
-
+const SiteViews: React.FC<SiteViewsProps> = ({
+  projectName,
+  children,
+  refresh,
+  getData,
+  visited,
+  suppressLogs,
+  style,
+  className,
+  ...rest
+}) => {
   const log = new Log(suppressLogs);
   const { isLocal, isVisited } = useUtils();
   const deviceInfo = useGetDeviceInfo();
   const rs = useReqRes();
   const ipInfo = useGetIpInfo();
 
-  const [count, setCount] = useState(0);
+  const [count, setCount] = React.useState(0);
 
-  if (isLocal) {
+  if (isLocal)
     log.warn(
       "To use 'SiteViews', Please Deploy your website at first. SiteViews Does not work in in Local Development"
     );
-  }
 
   if (projectName) {
     projectName = slugify(projectName);
@@ -66,19 +54,17 @@ const SiteViews: FC<SiteViewsProps> = (props: SiteViewsProps) => {
     );
   }
 
-  if (visited && typeof visited !== "function") {
+  if (visited && typeof visited !== "function")
     log.err(
       `visited props required a 'function'. but got '${typeof visited}'.`
     );
-  }
 
-  if (getData && typeof getData !== "function") {
+  if (getData && typeof getData !== "function")
     log.err(
       `visited props required a 'function'. but got '${typeof getData}'.`
     );
-  }
 
-  const init = useCallback(async () => {
+  const init = React.useCallback(async () => {
     try {
       const combineInfo = {
         project: projectName,
@@ -108,7 +94,7 @@ const SiteViews: FC<SiteViewsProps> = (props: SiteViewsProps) => {
     }
   }, []);
 
-  const displayCount = useCallback(async () => {
+  const displayCount = React.useCallback(async () => {
     rs.setLoading();
 
     try {
@@ -131,7 +117,7 @@ const SiteViews: FC<SiteViewsProps> = (props: SiteViewsProps) => {
     }
   }, []);
 
-  const retriveUserInfo = useCallback(async () => {
+  const retrieveUserInfo = React.useCallback(async () => {
     try {
       const res = await fetch(`${SITEVIEWS_API}/${projectName}?info=full`, {
         method: "GET",
@@ -148,7 +134,7 @@ const SiteViews: FC<SiteViewsProps> = (props: SiteViewsProps) => {
     }
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     let timer: number;
 
     if (!isVisited && !isLocal) {
@@ -166,7 +152,7 @@ const SiteViews: FC<SiteViewsProps> = (props: SiteViewsProps) => {
       }
 
       if (getData) {
-        retriveUserInfo();
+        retrieveUserInfo();
       }
     }
 
